@@ -12,4 +12,6 @@ public interface CustomerService {
     boolean updateCustomer(CustomerDTO customerDTO);
 
     CustomerDTO getCustomerByName(String customerName);
+
+    boolean deleteCustomer(int customerId);
 }

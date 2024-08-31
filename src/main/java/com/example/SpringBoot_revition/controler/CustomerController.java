@@ -44,4 +44,12 @@ public class CustomerController {
             return "Customer not found";
         }
     }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public String deleteCustomer(@PathVariable(value = "id") int customerId){
+        if (customerService.deleteCustomer(customerId)) {
+            return "Deleted";
+        }else return "Delete process field";
+
+    }
 }

@@ -71,4 +71,10 @@ public class CustomerServiceIMPL implements CustomerService {
         Customer customer = customerRepo.getByName(customerName);
         return modelMapper.map(customer,CustomerDTO.class);
     }
+
+    @Override
+    public boolean deleteCustomer(int customerId) {
+        customerRepo.deleteById(customerId);
+        return  true;
+    }
 }
