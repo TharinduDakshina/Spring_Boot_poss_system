@@ -4,6 +4,7 @@ import com.example.SpringBoot_revition.dto.request.ItemDTO;
 import com.example.SpringBoot_revition.entity.Item;
 import com.example.SpringBoot_revition.repository.ItemRepo;
 import com.example.SpringBoot_revition.service.ItemService;
+import com.example.SpringBoot_revition.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,12 @@ public class ItemServiceIMPL implements ItemService {
     private ItemRepo itemRepo;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ItemMapper itemMapper;
+
     @Override
     public String saveItem(ItemDTO itemDTO) {
-        Item item = modelMapper.map(itemDTO, Item.class);
+        Item item = itemMapper.dtoToEntity(itemDTO);
 
         if (!itemRepo.existsById(item.getCode())) {
             itemRepo.save(item);
