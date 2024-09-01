@@ -2,6 +2,7 @@ package com.example.SpringBoot_revition.service.impl;
 
 import com.example.SpringBoot_revition.dto.request.ItemDTO;
 import com.example.SpringBoot_revition.entity.Item;
+import com.example.SpringBoot_revition.exception.NotFoundExecution;
 import com.example.SpringBoot_revition.repository.ItemRepo;
 import com.example.SpringBoot_revition.service.ItemService;
 import com.example.SpringBoot_revition.util.mappers.ItemMapper;
@@ -56,8 +57,14 @@ public class ItemServiceIMPL implements ItemService {
     public ArrayList<ItemDTO> getAll() {
         ArrayList<Item> all = (ArrayList<Item>) itemRepo.findAll();
         ArrayList<ItemDTO> allItems = new ArrayList<>();
-        allItems=modelMapper.map(all,new TypeToken<ArrayList<ItemDTO>>(){}.getType());
-        return allItems;
+
+        if (all.size()>0) {
+            allItems=modelMapper.map(all,new TypeToken<ArrayList<ItemDTO>>(){}.getType());
+            return allItems;
+        }else {
+            throw new NotFoundExecution("No Items in database");
+        }
+
     }
 
     @Override

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,4 +23,13 @@ public class Customer {
     @Column(name = "Contact number")
     private String contactNo;
 
+    @OneToMany(mappedBy="order_id")
+    private Set<Orders> orders;
+
+    public Customer(int customer_Id, String name, String address, String contactNo) {
+        this.customer_Id = customer_Id;
+        this.name = name;
+        this.address = address;
+        this.contactNo = contactNo;
+    }
 }

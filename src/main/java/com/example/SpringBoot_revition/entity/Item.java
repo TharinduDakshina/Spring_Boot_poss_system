@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -26,6 +28,9 @@ public class Item {
     @Column(name = "unit_price",length = 45)
     private double unitPrice;
 
-    @Column(name = "item qty",length = 100)
+    @Column(name = "item qty",length = 50)
     private int qty;
+
+    @OneToMany(mappedBy = "code")
+    private Set<OrderDetails> orderDetails;
 }
