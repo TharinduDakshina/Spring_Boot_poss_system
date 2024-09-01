@@ -25,11 +25,18 @@ public class Orders {
     private Customer customer;
 
     @Column(name = "order_date",length = 25,nullable = false,columnDefinition = "DATETIME")
-    private Date date;
+    private Date order_date;
 
     @Column(name = "total",nullable = false)
     private Double total;
 
     @OneToMany(mappedBy = "orders")
     private Set<OrderDetails> orderDetailsset;
+
+
+    public Orders(Customer customer, Date date, Double total) {
+        this.customer = customer;
+        this.order_date = date;
+        this.total = total;
+    }
 }
